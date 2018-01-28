@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html ng-app="BooksApp">
+    <head>
+        <meta charset="utf-8"/>
+        <title>BooksApp</title>
+        <link rel="stylesheet" href="css/libs/foundation.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    </head>
+    <body ng-controller="feedController">
+        <div class="row">
+            <div class="large-2 columns left side_panel">
+                <div class="large-12 columns">
+                    <div class="">
+                        <div class="item_list">Все книги</div>
+                        <div class="item_list">Прочитанные</div>
+                        <div class="item_list">Избранное</div>
+                    </div>
+                </div>
+            </div>
+            <div class="large-10 columns content">
+                <div class="large-12 columns search_block no_padding">
+                    <div class="large-4 columns no_padding">
+                        <input type="search" placeholder="Поиск..." data-ng-model="filterText">
+                    </div>
+                    <button class="large-5 columns button btn right" ng-click="LogOut($event)" type="button" tabindex="-1" ng-show="isAuth">Выход</button>
+                    
+                    <button data-reveal-id="logInModal" class="button btn btn-info right" type="button" tabindex="-1" ng-show="!isAuth">Вход</button>
+                    <!-- LogInModule window -->
+                    <div id="logInModal" class="reveal-modal remove-whitespace" data-reveal>
+                        <div class="row">
+                            <div class="large-12 columns auth-plain">
+                              <div class="signup-panel left-solid">
+                                <p class="welcome">Авторизация</p>
+                                <hr>
+                                <form name="loginfrm" class="loginfrm" novalidate>
+                                  <div class="row collapse">
+                                    <div class="large-4 small-10 columns">
+                                      <p>Email</p>
+                                    </div>
+                                    <div class="large-8 small-10 columns">
+                                      <input type="email" placeholder="name@example.com" ng-model="logInEmail" name="logInEmail" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                      <div class="large-4 small-10 columns">
+                                          <p>Пароль</p>
+                                      </div>
+                                      <div class="large-8 small-10 columns">
+                                          <input type="password" placeholder="Password" ng-model="logInPass" name="logInPass" required>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                </form>
+                                <div class="large-offset-7 large-5 columns right no_padding">
+                                    <button data-reveal-id="logInModal" class="large-5 columns button btn right" ng-click="logIn($event)" type="button" tabindex="-1">Вход</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <a class="close-reveal-modal">&#215;</a>
+                    </div> 
+                    
+                    <button data-reveal-id="registerModal" class="button btn btn-info right" type="button" tabindex="-1" ng-show="!isAuth">Регистрация</button>
+                    <!-- registerModule window -->
+                    <div id="registerModal" class="reveal-modal remove-whitespace" data-reveal>
+                        <div class="row">
+                            <div class="large-12 columns auth-plain">
+                              <div class="signup-panel left-solid">
+                                <p class="welcome">Зарегистрироваться</p>
+                                <hr>
+                                <form name="regfrm" class="registerModal" novalidate>
+                                  <div class="row collapse">
+                                    <div class="large-4 small-10  columns">
+                                      <p>Логин</p>
+                                    </div>
+                                    <div class="large-8 small-10  columns">
+                                      <input type="text" placeholder="Логин" ng-model="registerLogin" name="registerLogin" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                    <div class="large-4 small-10 columns">
+                                      <p>Email</p>
+                                    </div>
+                                    <div class="large-8 small-10 columns">
+                                      <input type="email" placeholder="name@example.com" ng-model="registerEmail" name="registerEmail" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                      <div class="large-4 small-10 columns">
+                                          <p>Пароль</p>
+                                      </div>
+                                      <div class="large-8 small-10 columns">
+                                          <input type="password" placeholder="Password" ng-model="registerPass" name="registerPass" required>
+                                      </div>
+                                      <div class="large-8 small-10 columns">
+                                          <input type="password" placeholder="Confirm password" ng-model="registerConfirmPass" name="registerConfirmPass" required>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                </form>
+                                <div class="large-offset-7 large-5 columns right no_padding">
+                                    <button data-reveal-id="regfrm" class="large-5 columns button btn right" ng-click="checkIn($event)" type="button" tabindex="-1">Зарегистрироваться</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>   
+                        <a class="close-reveal-modal">&#215;</a>
+                    </div> 
+                    
+                </div>
+                <div class="large-12 columns content_block no_padding">
+                    <button data-reveal-id="editModal" class="button btn btn-info" type="button" tabindex="-1">Редактировать книгу</button>
+                    <!-- editModule window -->
+                    <div id="editModal" class="reveal-modal remove-whitespace" data-reveal>
+                        <div class="row">
+                            <div class="large-12 columns auth-plain">
+                                <div class="signup-panel left-solid">
+                                    <p class="welcome">Редактировать книгу</p>
+                                    <hr>
+                                    <form name="editfrm" class="editfrm" novalidate>
+                                        <div class="row collapse">
+                                    <div class="large-4 small-10  columns">
+                                      <p>Название книги</p>
+                                    </div>
+                                    <div class="large-8 small-10  columns">
+                                      <input type="text" placeholder="Название книги" ng-model="editBookTitle" name="editBookTitle" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                    <div class="large-4 small-10 columns">
+                                      <p>Авторы</p>
+                                    </div>
+                                    <div class="large-8 small-10 columns">
+                                      <input type="text" placeholder="URL" ng-model="editBookAuth" name="editBookAuth" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                    <div class="large-4 small-10 columns">
+                                      <p>Описание</p>
+                                    </div>
+                                    <div class="large-8 small-10 columns">
+                                      <input type="text" ng-model="editBookDescription" name="editBookDescription" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                      <div class="large-4 small-10 columns">
+                                          <p>Категория</p>
+                                      </div>
+                                      <div class="large-8 small-10 columns">
+                                          <select name="selectGroup" ng-model="selectEditBookCategory" required>
+                                            <option ng-repeat="item in listGroup">Фантастика</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                        <hr>
+                                    </form>
+                                    <div class="large-offset-7 large-5 columns right">
+                                        <button data-reveal-id="editModal" class="large-5 columns button btn btn-info right" ng-click="editBook()" type="button" tabindex="-1">Сохранить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                        <a class="close-reveal-modal">&#215;</a>
+                    </div>
+                    <button data-reveal-id="addModal" class="button btn btn-info" type="button" tabindex="-1">Добавить книгу</button>
+                    <!-- addModule window -->
+                    <div id="addModal" class="reveal-modal remove-whitespace" data-reveal>
+                        <div class="row">
+                            <div class="large-12 columns auth-plain">
+                              <div class="signup-panel left-solid">
+                                <p class="welcome">Добавить новую книгу</p>
+                                <hr>
+                                <form name="addfrm" class="addfrm" novalidate>
+                                  <div class="row collapse">
+                                    <div class="large-4 small-10  columns">
+                                      <p>Название книги</p>
+                                    </div>
+                                    <div class="large-8 small-10  columns">
+                                      <input type="text" placeholder="Название книги" ng-model="titleNewBook" name="titleNewBook" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                    <div class="large-4 small-10 columns">
+                                      <p>Авторы</p>
+                                    </div>
+                                    <div class="large-8 small-10 columns">
+                                      <input type="text" placeholder="URL" ng-model="newBookAuthor" name="newBookAuthor" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                    <div class="large-4 small-10 columns">
+                                      <p>Описание</p>
+                                    </div>
+                                    <div class="large-8 small-10 columns">
+                                      <input type="text" ng-model="newBookDescription" name="newBookDescription" required>
+                                    </div>
+                                  </div>
+                                  <div class="row collapse">
+                                      <div class="large-4 small-10 columns">
+                                          <p>Категория</p>
+                                      </div>
+                                      <div class="large-8 small-10 columns">
+                                          <select name="selectGroup" ng-model="selectNewBookCategory" required>
+                                            <option ng-repeat="item in listCategory">{{item}}</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <hr>
+                                </form>
+                                <div class="large-offset-7 large-5 columns right no_padding">
+                                    <button data-reveal-id="addModal" class="large-5 columns button btn right" ng-click="addBook($event)" type="button" tabindex="-1">Добавить</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>   
+                        <a class="close-reveal-modal">&#215;</a>
+                    </div> 
+                    
+                    <div ng-model="htmlcode" class="large-12 columns" style="overflow: auto">
+                        <ul class="list_news">
+                            <li ng-repeat="book in listBooks">
+                                <h6 class="large-11 columns link_name no_padding">{{book.name}}</h6> 
+                                <p class="large-11 columns link no_padding">{{book.author}}</p>
+                                <p class="large-11 columns link no_padding">{{book.description}}</p>
+                                <p class="large-11 columns link no_padding">{{book.genre}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+        <script src="js/angularjs/angular.min.js"></script>
+        <script src="js/libs/jquery.js"></script>
+        <script src="js/libs/foundation.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/controller/feedController.js"></script>
+    </body>
+</html>
