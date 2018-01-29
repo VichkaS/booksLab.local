@@ -3,6 +3,7 @@ angular.module('BooksApp').controller("feedController", ['$scope', '$http', func
     $scope.login = "";
     $scope.loginError = false;
     var token = '';
+    
     $scope.getBooks = function() {       
         $http({
           method: "GET",
@@ -59,7 +60,15 @@ angular.module('BooksApp').controller("feedController", ['$scope', '$http', func
               token = response.data.token;
               $scope.login = $scope.registerLogin;
               $scope.isAuth = true;
+              $scope.loginError = false;
+              $scope.registerLogin = "";
+              $scope.registerEmail = "";
+              $scope.registerPass = "";
+              $scope.registerConfirmPass = "";
               console.log(token);
+          }, function error(response) {
+              $scope.loginError = true;
+              console.log(response);
           });
     }
     
@@ -105,6 +114,10 @@ angular.module('BooksApp').controller("feedController", ['$scope', '$http', func
           dataType: "json" }).then(
           function successCallback(response) {
               $scope.listBooks.push(response.data);
+              $scope.titleNewBook = "";
+              $scope.newBookAuthor = "";
+              $scope.newBookDescription = "";
+              $scope.newBookGenre = "";
               console.log(response);
           });
     };
@@ -118,7 +131,6 @@ angular.module('BooksApp').controller("feedController", ['$scope', '$http', func
     }
     
     $scope.saveEditBook = function(id) {
-        
         $http({
           method: "PUT",
           headers: {"x-access-token": token},
