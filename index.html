@@ -247,7 +247,7 @@
                     
                     <div ng-model="htmlcode" class="large-12 columns news" style="overflow: auto">
                         <ul class="list_news">
-                            <li class="book" ng-repeat="book in listBooks">
+                            <li class="book" ng-repeat="book in listBooks | filter:filterText">
                                 <p class="large-11 columns link_name no_padding">{{book.name}}</p>
                                 <p class="large-11 columns link no_padding">Автор: {{book.author}}</p>
                                 <p class="large-11 columns link no_padding">Жанр: {{book.genre}}</p>
