@@ -214,7 +214,10 @@ angular.module('BooksApp').controller("feedController", ['$scope', '$http', func
           headers: {"x-access-token": token},
           dataType: "json" }).then(
           function successCallback(response) {
-              $scope.getBooks();
+              for (var i = 0; i < $scope.listBooks.length; i++) {
+                if ($scope.listBooks[i]._id == id) {
+                    $scope.listBooks[i].favorite = !$scope.listBooks[i].favorite;
+              }
 
           }, function error(response) {
               console.log(response);
@@ -228,7 +231,10 @@ angular.module('BooksApp').controller("feedController", ['$scope', '$http', func
           headers: {"x-access-token": token},
           dataType: "json" }).then(
           function successCallback(response) {
-              $scope.getBooks();
+              for (var i = 0; i < $scope.listBooks.length; i++) {
+                if ($scope.listBooks[i]._id == id) {
+                    $scope.listBooks[i].read = !$scope.listBooks[i].read;
+              }
           }, function error(response) {
               console.log(response);
           });
