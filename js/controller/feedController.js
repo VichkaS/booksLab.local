@@ -214,7 +214,7 @@ angular.module('BooksApp').controller("feedController", ['$scope', '$http', func
           headers: {"x-access-token": token},
           dataType: "json" }).then(
           function successCallback(response) {
-              $scope.getFavoritesBooks();
+              $scope.getBooks();
 
           }, function error(response) {
               console.log(response);
@@ -228,7 +228,7 @@ angular.module('BooksApp').controller("feedController", ['$scope', '$http', func
           headers: {"x-access-token": token},
           dataType: "json" }).then(
           function successCallback(response) {
-              $scope.getReadBooks();
+              $scope.getBooks();
           }, function error(response) {
               console.log(response);
           });

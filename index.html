@@ -12,12 +12,12 @@
             <div class="large-2 columns left side_panel">
                 <div class="large-12 columns">
                     <div class="welcome_msg"> 
-                        <span ng-show="isAuth">Здравствуйте, <br> {{login}}!</span>
+                        <span ng-show="isAuth" id="welcomMsg">Здравствуйте, <br> {{login}}!</span>
                     </div>
                     <div class="">
-                        <div class="menu_item" ng-click="getAllBooks($event)">Все книги</div>
-                        <div class="menu_item" ng-click="getReadBooks($event)" ng-show="isAuth">Прочитанные</div>
-                        <div class="menu_item" ng-click="getFavoritesBooks($event)" ng-show="isAuth">Избранное</div>
+                        <div class="menu_item" ng-click="getAllBooks($event)" id="allBooksItem">Все книги</div>
+                        <div class="menu_item" ng-click="getReadBooks($event)" ng-show="isAuth" id="readBookItem">Прочитанные</div>
+                        <div class="menu_item" ng-click="getFavoritesBooks($event)" ng-show="isAuth" id="favoriteBooksItem">Избранное</div>
                     </div>
                 </div>
             </div>
@@ -33,11 +33,11 @@
                             </span>
                         </div>
                         <div class="right large-2 columns">
-                            <button class="button btn" ng-click="logOut($event)" type="button" tabindex="-1" ng-show="isAuth">Выход</button>
+                            <button class="button btn" ng-click="logOut($event)" type="button" tabindex="-1" ng-show="isAuth" id="logOutButton">Выход</button>
                         </div>
 
                         <div class="right large-2 columns">
-                            <button data-reveal-id="logInModal" class="button btn btn-info" type="button" tabindex="-1" ng-show="!isAuth">Вход</button>
+                            <button data-reveal-id="logInModal" class="button btn btn-info" type="button" tabindex="-1" ng-show="!isAuth" id="loginButton">Вход</button>
                             <!-- LogInModule window -->
                             <div id="logInModal" class="reveal-modal remove-whitespace" data-reveal>
                                 <div class="row">
@@ -63,13 +63,13 @@
                                               </div>
                                           </div>
                                           <div class="large-offset-4 large-8 columns no_padding error_msg" ng-show="(loginfrm.logInEmail.$invalid && loginfrm.logInEmail.$dirty) || (loginfrm.logInPass.$invalid && loginfrm.logInPass.$dirty)">
-                                                <p class="error_msg" ng-show="loginfrm.logInPass.$error.required">Поля не могут быть пустыми.</p>
-                                                <p class="error_msg" ng-show="loginfrm.logInEmail.$invalid">Некорректный email.</p>
+                                                <p class="error_msg" ng-show="loginfrm.logInPass.$error.required" id="emptyFieldMsg">Поля не могут быть пустыми.</p>
+                                                <p class="error_msg" ng-show="loginfrm.logInEmail.$invalid" id="incorectEmailMsg">Некорректный email.</p>
                                           </div>
                                           <hr>
                                         </form>
                                         <div class="large-offset-7 large-5 columns right no_padding">
-                                            <button data-reveal-id="logInModal" class="large-5 columns button btn right" ng-click="logIn($event)" type="button" tabindex="-1" ng-disabled="(loginfrm.logInEmail.$invalid && loginfrm.logInEmail.$dirty) || (loginfrm.logInPass.$invalid && loginfrm.logInPass.$dirty) || loginfrm.$invalid" >Вход</button>
+                                            <button data-reveal-id="logInModal" class="large-5 columns button btn right" ng-click="logIn($event)" type="button" tabindex="-1" ng-disabled="(loginfrm.logInEmail.$invalid && loginfrm.logInEmail.$dirty) || (loginfrm.logInPass.$invalid && loginfrm.logInPass.$dirty) || loginfrm.$invalid" id="loginButtonForm">Вход</button>
                                         </div>
                                       </div>
                                     </div>
@@ -79,7 +79,7 @@
                         </div>
 
                         <div class="right large-2 columns">
-                            <button data-reveal-id="registerModal" class="button btn btn-info right" type="button" tabindex="-1" ng-show="!isAuth">Регистрация</button>
+                            <button data-reveal-id="registerModal" class="button btn btn-info right" type="button" tabindex="-1" ng-show="!isAuth" id="registerButton">Регистрация</button>
                             <!-- registerModule window -->
                             <div id="registerModal" class="reveal-modal remove-whitespace" data-reveal>
                                 <div class="row">
@@ -116,13 +116,13 @@
                                               </div>
                                           </div>
                                           <div class="large-offset-4 large-8 columns no_padding error_msg" ng-show="(regfrm.registerLogin.$invalid && regfrm.registerLogin.$dirty) || (regfrm.registerEmail.$invalid && regfrm.registerEmail.$dirty) || (regfrm.registerPass.$invalid && regfrm.registerPass.$dirty) || (regfrm.registerConfirmPass.$invalid && regfrm.registerConfirmPass.$dirty)">
-                                              <span class="error_msg" ng-show="regfrm.registerLogin.$error.required || regfrm.registerEmail.$error.required || regfrm.registerPass.$error.required || regfrm.registerConfirmPass.$error.required">Поля не могут быть пустыми.</span>
-                                              <p class="error_msg" ng-show="regfrm.registerEmail.$invalid">Некорректный email.</p>
+                                              <span class="error_msg" ng-show="regfrm.registerLogin.$error.required || regfrm.registerEmail.$error.required || regfrm.registerPass.$error.required || regfrm.registerConfirmPass.$error.required" id="emptyFieldMsg">Поля не могут быть пустыми.</span>
+                                              <p class="error_msg" ng-show="regfrm.registerEmail.$invalid" id="incorectEmailMsg">Некорректный email.</p>
                                           </div>
                                           <hr>
                                         </form>
                                         <div class="large-offset-7 large-5 columns right no_padding">
-                                            <button data-reveal-id="registerModal" class="large-5 columns button btn right" ng-click="checkIn($event)" type="button" tabindex="-1" ng-disabled="(regfrm.registerLogin.$invalid && regfrm.registerLogin.$dirty) || (regfrm.registerEmail.$invalid && regfrm.registerEmail.$dirty) || (regfrm.registerPass.$invalid && regfrm.registerPass.$dirty) || (regfrm.registerConfirmPass.$invalid && regfrm.registerConfirmPass.$dirty) || regfrm.$invalid">Зарегистрироваться</button>
+                                            <button data-reveal-id="registerModal" class="large-5 columns button btn right" ng-click="checkIn($event)" type="button" tabindex="-1" ng-disabled="(regfrm.registerLogin.$invalid && regfrm.registerLogin.$dirty) || (regfrm.registerEmail.$invalid && regfrm.registerEmail.$dirty) || (regfrm.registerPass.$invalid && regfrm.registerPass.$dirty) || (regfrm.registerConfirmPass.$invalid && regfrm.registerConfirmPass.$dirty) || regfrm.$invalid" id="registerButtonForm">Зарегистрироваться</button>
                                         </div>
                                       </div>
                                     </div>
@@ -134,7 +134,7 @@
 
                 </div>
                 <div>
-                    <button data-reveal-id="addModal" class="button btn btn-info" type="button" tabindex="-1" ng-show="isAuth">Добавить книгу</button>
+                    <button data-reveal-id="addModal" class="button btn btn-info" type="button" tabindex="-1" ng-show="isAuth" id="addBookButton">Добавить книгу</button>
                     <!-- addModule window -->
                     <div id="addModal" class="reveal-modal remove-whitespace" data-reveal>
                         <div class="row">
@@ -177,12 +177,12 @@
                                   </div>
     
                                   <div class="large-offset-4 large-8 columns no_padding error_msg" ng-show="(addfrm.titleNewBook.$invalid && addfrm.titleNewBook.$dirty) || (addfrm.newBookAuthor.$invalid && addfrm.newBookAuthor.$dirty) || (addfrm.newBookGenre.$invalid && addfrm.newBookGenre.$dirty)">
-                                      <span class="error_msg" ng-show="addfrm.titleNewBook.$error.required || addfrm.newBookAuthor.$error.required || addfrm.newBookGenre.$error.required">Поля не могут быть пустыми.</span>
+                                      <span class="error_msg" ng-show="addfrm.titleNewBook.$error.required || addfrm.newBookAuthor.$error.required || addfrm.newBookGenre.$error.required" id="emptyFieldMsg">Поля не могут быть пустыми.</span>
                                    </div>
                                   <hr>
                                 </form>
                                 <div class="large-offset-7 large-5 columns right no_padding">
-                                    <button data-reveal-id="addModal" class="large-5 columns button btn right" ng-click="addBook($event)" type="button" tabindex="-1" ng-disabled="(addfrm.newBookAuthor.$invalid && addfrm.newBookAuthor.$dirty) || (addfrm.titleNewBook.$invalid && addfrm.titleNewBook.$dirty) || (addfrm.newBookGenre.$invalid && addfrm.newBookGenre.$dirty) || addfrm.$invalid">Добавить</button>
+                                    <button data-reveal-id="addModal" class="large-5 columns button btn right" ng-click="addBook($event)" type="button" tabindex="-1" ng-disabled="(addfrm.newBookAuthor.$invalid && addfrm.newBookAuthor.$dirty) || (addfrm.titleNewBook.$invalid && addfrm.titleNewBook.$dirty) || (addfrm.newBookGenre.$invalid && addfrm.newBookGenre.$dirty) || addfrm.$invalid" id="addBookButtonForm">Добавить</button>
                                 </div>
                               </div>
                             </div>
@@ -232,12 +232,12 @@
                                     </div>
                                   </div>
                                     <div class="large-offset-4 large-8 columns no_padding error_msg" ng-show="(editfrm.editBookTitle.$invalid && editfrm.editBookTitle.$dirty) || (editfrm.editBookAuth.$invalid && editfrm.editBookAuth.$dirty) || (editfrm.editBookGenre.$invalid && editfrm.editBookGenre.$dirty)">
-                                      <span class="error_msg" ng-show="editfrm.editBookTitle.$error.required || editfrm.editBookAuth.$error.required || editfrm.editBookGenre.$error.required">Поля не могут быть пустыми.</span>
+                                      <span class="error_msg" ng-show="editfrm.editBookTitle.$error.required || editfrm.editBookAuth.$error.required || editfrm.editBookGenre.$error.required" id="emptyFieldMsg">Поля не могут быть пустыми.</span>
                                     </div>
                                         <hr>
                                     </form>
                                     <div class="large-offset-7 large-5 columns right">
-                                        <button data-reveal-id="editModal" class="large-5 columns button btn right" ng-click="saveEditBook(editBookId)" type="button" tabindex="-1" ng-disabled="(editfrm.editBookTitle.$invalid && editfrm.editBookTitle.$dirty) || (editfrm.editBookAuth.$invalid && editfrm.editBookAuth.$dirty) || (editfrm.editBookGenre.$invalid && editfrm.editBookGenre.$dirty) || editfrm.$invalid">Сохранить</button>
+                                        <button data-reveal-id="editModal" class="large-5 columns button btn right" ng-click="saveEditBook(editBookId)" type="button" tabindex="-1" ng-disabled="(editfrm.editBookTitle.$invalid && editfrm.editBookTitle.$dirty) || (editfrm.editBookAuth.$invalid && editfrm.editBookAuth.$dirty) || (editfrm.editBookGenre.$invalid && editfrm.editBookGenre.$dirty) || editfrm.$invalid" id="editBookButtonForm">Сохранить</button>
                                     </div>
                                 </div>
                             </div>
@@ -248,15 +248,15 @@
                     <div ng-model="htmlcode" class="large-12 columns news" style="overflow: auto">
                         <ul class="list_news">
                             <li class="book" ng-repeat="book in listBooks | filter:filterText">
-                                <p class="large-11 columns link_name no_padding">{{book.name}}</p>
-                                <p class="large-11 columns link no_padding">Автор: {{book.author}}</p>
-                                <p class="large-11 columns link no_padding">Жанр: {{book.genre}}</p>
-                                <p class="large-11 columns link no_padding" ng-show="book.description.length > 0">Описание: {{book.description}}</p>
-                                <button data-reveal-id="editModal" class="button btn btn-info" type="button" tabindex="-1" ng-click="saveCurrentBook(book)" ng-show="isAuth">Редактировать</button>
-                                <button class="button btn btn-info" type="button" tabindex="-1" ng-click="getFavorits(book._id)" ng-show="isAuth">
+                                <p class="large-11 columns link_name no_padding" id="bookName">{{book.name}}</p>
+                                <p class="large-11 columns link no_padding" id="bookAuthor">Автор: {{book.author}}</p>
+                                <p class="large-11 columns link no_padding" id="bookGenre">Жанр: {{book.genre}}</p>
+                                <p class="large-11 columns link no_padding" ng-show="book.description.length > 0" id="bookDescription">Описание: {{book.description}}</p>
+                                <button data-reveal-id="editModal" class="button btn btn-info" type="button" tabindex="-1" ng-click="saveCurrentBook(book)" ng-show="isAuth" id="editButton">Редактировать</button>
+                                <button class="button btn btn-info" type="button" tabindex="-1" ng-click="getFavorits(book._id)" ng-show="isAuth" id="favoriteButton">
                                     <span ng-show="!book.favorite">В избранное</span>
                                     <span ng-show="book.favorite">Из избранного</span></button>
-                                <button class="button btn btn-info" type="button" tabindex="-1" ng-click="getRead(book._id)" ng-show="isAuth">
+                                <button class="button btn btn-info" type="button" tabindex="-1" ng-click="getRead(book._id)" ng-show="isAuth" id="readButton">
                                     <span ng-show="!book.read">В прочитанное</span>
                                     <span ng-show="book.read">Из прочитанного</span>
                                 </button>
